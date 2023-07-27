@@ -1,1 +1,1 @@
-<h1>Creativeology</h1>
+<h1 align="center">Creativeology</h1>
