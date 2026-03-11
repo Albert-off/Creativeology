@@ -545,7 +545,7 @@ img {
     height: 320px;
     margin-top: -2rem;
 
-    background-image: url("/assets/img/intro/drink-photo.jpg");
+    background-image: url("./assets/img/intro/drink-photo.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
