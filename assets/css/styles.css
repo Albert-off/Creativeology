@@ -1,0 +1,620 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+/* cursive */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+    --header-height-desktop: 90px;
+    --header-height-mobile: 60px;
+
+    --color-heading-primary: hsl(0, 0%, 10%);
+    --color-heading-secondary: hsl(50, 27%, 40%);
+
+    /*========== Colors ==========*/
+    /* Change favorite color */
+    --hue-color: 250; /*Purple 250 - Green 142 - Blue 230 - Pink 340*/
+
+    /*Color mode HSL(hue, saturation, lightness)*/
+    --first-color: hsl(220, 68%, 54%);
+    --first-color-lighten: hsl(220, 68%, 97%);
+    --dark-color: #0E1026;
+    --title-color: hsl(220, 48%, 28%);
+    --text-color: hsl(220, 12%, 45%);
+    --body-color: hsl(220, 100%, 99%);
+    --body-bg-color: hsl(48, 19%, 95%);
+    --white: hsl(0, 0%, 100%);
+
+    /*========== Font and typography ==========*/
+    /*.5rem = 8px | 1rem = 16px ...*/
+    --body-font: "Poppins", sans-serif;
+    --big-font-size: 2rem;
+    --h1-font-size: 1.5rem;
+    --h2-font-size: 1.25rem;
+    --h3-font-size: 1rem;
+    --normal-font-size: .938rem;
+    --small-font-size: .813rem;
+    --smaller-font-size: .75rem;
+
+    --nav-logo-font-size: 1.4rem;
+  
+    /*========== Typography ==========*/
+    --fs-base: 0.85rem;
+    --fs-1: 1.875rem;
+    --fs-2: 1.5rem;
+    --fs-3: 1.25rem;
+    --fs-4: 0.875rem;
+    --fs-5: 0.75rem;
+
+    /*========== Font weight ==========*/
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semi-bold: 600;
+    --font-bold: 700;
+
+    /*========== Margenes Bottom ==========*/
+    /*.5rem = 8px | 1rem = 16px ...*/
+    --mb-0-5: .5rem;
+    --mb-0-75: .75rem;
+    --mb-1: 1rem;
+    --mb-1-5: 1.5rem;
+    --mb-2: 2rem;
+    --mb-2-5: 2.5rem;
+
+    /*========== z index ==========*/
+    --z-tooltip: 10;
+    --z-fixed: 999;
+}
+
+@media screen and (min-width: 968px) {
+    :root {
+        --big-font-size: 3.5rem;
+        --h1-font-size: 2.25rem;
+        --h2-font-size: 1.5rem;
+        --h3-font-size: 1.25rem;
+        --normal-font-size: 1rem;
+        --small-font-size: .875rem;
+        --smaller-font-size: .813rem;
+        
+        --nav-logo-font-size: 1.5rem;
+    }
+}
+
+
+/* ================ BASE ================ */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--body-bg-color);
+    font-family: var(--body-font);
+
+    min-height: 100%;
+    padding-block-start: calc(var(--header-height-mobile) + 1px);
+}
+
+body,
+button,
+input,
+textarea {
+    font-size: var(--normal-font-size);
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+h1 {
+    font-family: "Playfair Display", serif;
+    font-size: var(--h1-font-size);
+    font-weight: var(--font-semi-bold);
+    color: var(--color-heading-primary);
+}
+
+h2 {
+    color: var(--color-heading-secondary);
+    font-size: var(--h2-font-size);
+    font-weight: var(--font-regular);
+}
+
+ul { list-style: none; }
+  
+a { text-decoration: none; }
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ================ REUSABLE CSS CLASSES ================ */
+.container {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+
+
+/* ================ HEADER ================ */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: var(--z-fixed);
+    background-color: #F4F3EF;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ================ NAV ================ */
+.header__container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height-mobile);
+}
+
+.header__logo {
+    font-family: "Vollkorn", serif;
+    font-size: var(--nav-logo-font-size);
+    font-weight: 600;
+    letter-spacing: .75rem;
+
+    color: #aa9f6b;
+    cursor: pointer;
+
+    transition: font-size .6s;
+}
+
+.nav {
+    position: absolute;
+    top: calc(var(--header-height-mobile) + 1px);
+    left: 0;
+    right: 0;
+    
+    background-color: #F4F3EF;
+
+    overflow: hidden;
+
+    font-family: "Playfair Display", serif;
+    font-size: 1.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+
+    /* Show menu */
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .5s;
+
+    /* помогает браузеру оптимизировать анимацию */
+    will-change: grid-template-rows;
+}
+
+.nav__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+
+    overflow: hidden;
+}
+
+.nav__item {
+    padding-block: 20px;
+
+    /* -- for smooth .nav__item animation when closing .nav -- */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity .3s, transform .3s;
+}
+
+.nav__link {
+    color: #494D5F;
+    padding-block: 6px;
+    padding-inline: .75rem;
+    border-radius: 4px;
+    
+    transition: background-color .2s, color .2s;
+}
+/* 1. Состояние при наведении (только для устройств с мышкой) | Desktop */
+@media (hover: hover) {
+    .nav__link:hover {
+        color: #f0f3c3;
+        background-color: #aa9f6b;
+    }
+}
+/* 2. Состояние при нажатии (pointer: coarse означает "грубый указатель", т.е. палец) | Mobile/Tablet */
+@media (pointer: coarse) {
+    .nav__link:active {
+        color: #f0f3c3;
+        background-color: #aa9f6b;
+    }
+}
+
+.nav__toggle {
+    position: relative;
+    height: 36px;
+    width: 36px;
+    border-radius: 4px;
+    background-color: #aa9f6b;
+}
+
+.nav__burger,
+.nav__close {
+  position: absolute;
+  width: max-content;
+  height: max-content;
+  inset: 0;
+  margin: auto;
+  font-size: 1.5rem;
+  color: #ffffff;
+  transition: opacity .1s, transform .4s;
+}
+.nav__close {
+  opacity: 0;
+}
+
+
+/* Show icon */
+.is-active .nav__burger {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+.is-active .nav__close {
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+.nav.is-open {
+    grid-template-rows: 1fr;
+    border-block-end: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* -- for smooth .nav__item animation when closing .nav -- */
+.nav.is-open .nav__item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ================ MEDIA QUERIES ================ */
+@media screen and (min-width: 768px) {
+    body {
+        padding-block-start: calc(var(--header-height-desktop) + 1px);
+    }
+
+    .header__container {
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: var(--header-height-desktop);
+    }
+
+    .nav__toggle {
+        display: none;
+    }
+
+    .nav {
+        position: static;
+        display: block;
+
+        background-color: transparent;
+        overflow: visible;
+
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        text-transform: none;
+
+        /* Отключаем всё, что связано с анимацией */
+        transition: none;
+        will-change: auto;
+    }
+
+    .nav__list {
+        flex-direction: row;
+        gap: 20px;
+
+        overflow: visible;
+    }
+
+    .nav__item {
+        padding: 0;
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+
+
+
+
+/* ================ MAIN ================ */
+
+
+/* ================ HOME ================ */
+.home__hero {
+    margin: 1rem 0;
+    /* background-color: yellowgreen; */
+}
+
+
+.hero__container {
+    padding-inline: 1rem;
+}
+
+.hero__images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .5rem;
+
+}
+
+.hero__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+@media (min-width: 768px) {
+    .hero__images {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.hero__description {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(var(--normal-font-size), 5vw, 1.5rem);
+    /* font-size: clamp(var(--normal-font-size), 5vw, 2rem); */
+    font-weight: 600;
+    text-align: center;
+
+    max-width: 700px;
+    margin: 2rem auto;
+}
+
+.cursive_text {
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.hero__hr {
+    border: none;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    max-width: 200px;
+}
+
+
+
+
+/* ================ TRUSTEDBY LOGOS ================ */
+.trustedby {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-block: 2rem;
+}
+
+/* контейнер ряда */
+.trustedby__wrapper {
+    width: 100%;
+    height: clamp(70px, 8vw, 100px);
+
+    max-width: 1536px;
+    margin-inline: auto;
+
+    overflow: hidden;
+
+    mask-image: linear-gradient(
+        to right,
+        rgba(0,0,0,0),
+        rgba(0,0,0,1) 20%,
+        rgba(0,0,0,1) 80%,
+        rgba(0,0,0,0)
+    );
+}
+
+/* движущийся трек */
+.trustedby__track {
+    display: flex;
+    align-items: center;
+    column-gap: 2rem;
+
+    /* list-style: none;
+    margin: 0;
+    padding-left: 0; */
+
+    width: max-content;
+
+    will-change: transform;
+    backface-visibility: hidden; /* Это иногда убирает subpixel jitter в Chrome. */ 
+}
+
+/* направление */
+.trustedby__track {
+    animation: marquee var(--duration) linear infinite;
+}
+
+.trustedby__track--right {
+    animation-direction: reverse;
+}
+
+@keyframes marquee {
+    from { 
+        transform: translateX(0); 
+    }
+    to { 
+        transform: translateX(calc(-1 * var(--marquee-distance)));
+    }
+}
+
+/* элемент */
+.trustedby__item {
+    flex-shrink: 0;
+
+    width: clamp(70px, 8vw, 100px);
+    height: clamp(70px, 8vw, 100px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgb(226, 225, 220);
+    border-radius: 50%;
+}
+
+/* изображения */
+.trustedby__item img {
+    max-height: clamp(60px, 8vw, 90px);
+
+    -webkit-filter: grayscale(100%) brightness(100%) contrast(50%);
+    filter: grayscale(100%) brightness(100%) contrast(50%);
+}
+
+/* hover эффект */
+.trustedby__item:hover {
+    background-color: rgb(226, 225, 200);
+}
+
+/* pause animation */
+.trustedby__wrapper:hover .trustedby__track {
+    animation-play-state: paused;
+}
+
+/* accessibility */
+/* @media (prefers-reduced-motion: reduce) {
+    .trustedby__track {
+        animation: none;
+    }
+} */
+
+
+
+
+/* ================ INTRO ================ */
+.intro {
+    position: relative;
+    min-height: 650px;
+    background-color: #FDF9F6;
+    overflow: hidden;
+}
+
+.intro__container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+
+    padding-block: 4rem;
+
+    position: relative;
+    z-index: 2;
+}
+
+.intro__title {
+    margin-bottom: 1rem;
+}
+
+.intro__subtitle {
+    margin-bottom: 2rem;
+}
+
+.intro__description:first-of-type {
+    margin-bottom: 1rem;
+}
+/* .intro__description { max-width: 40rem; } */
+
+.intro__image {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    margin-top: -2rem;
+
+    background-image: url("/assets/img/intro/drink-photo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    pointer-events: none;
+}
+
+
+@media (min-width: 768px) {
+    /* .intro__image {
+        width: 100%;
+        opacity: 0.25;
+    } */
+
+    .intro__container {
+        /* grid-template-columns: 1fr 1fr; */
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+    }
+
+    .intro__image {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        width: 55%;
+        height: 100%;
+    }
+
+    /* smooth disappearance */
+    .intro__image::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+
+        background: 
+            linear-gradient(
+                to left,
+                rgba(253,249,246,0) 60%,
+                rgba(253,249,246,0.8) 80%,
+                #FDF9F6 100%
+            ),
+            linear-gradient(
+                to bottom,
+                rgba(253,249,246,0) 94%,
+                rgba(253,249,246,0.8) 98%,
+                #FDF9F6 100%
+            );
+    }
+
+    /* Alternative */
+    /* .intro__image {
+    background: url("/assets/img/intro/drink-photo.jpg") center/cover no-repeat;
+
+    -webkit-mask-image: linear-gradient(to left, black 60%, transparent);
+    mask-image: linear-gradient(to left, black 60%, transparent);
+    } */
+}
+
+
+
+/* ================ FOOTER ================ */
+
+
+
+/* ================ MEDIA QUERIES ================ */
+@media screen and (max-width: 400px) {
+    .header__logo {
+        font-size: 1.2rem;
+        letter-spacing: .5rem;
+    }
+}
