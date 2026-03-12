@@ -438,3 +438,33 @@ marquees.forEach(wrapper => {
 
 
 
+
+// Минимальная production-логика.
+// const form = document.querySelector(".contact-form");
+
+// form.addEventListener("submit", e => {
+
+//   if (!form.checkValidity()) {
+//     e.preventDefault();
+//   }
+
+// });
+// Можно добавить кастомные ошибки.
+
+
+/* 
+9. Production UX
+
+После отправки:
+
+Loading state
+Success message
+Error message
+
+Например:
+
+<p class="contact-form__success">
+  Thank you! We'll get back to you soon.
+</p>
+*/
+

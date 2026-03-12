@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--=============== PRIMARY META TAGS ===============-->
+  <meta name="title" content="C R E A T I V O L O G Y">
+  <meta name="description" content="A creative agency/content studio helping you grow your brand online">
+
+  <!--=============== REMIXICONS ===============-->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!--=============== CSS ===============-->
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <!--=============== FAVICONS ===============-->
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/fl1/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/fl1/favicon-32x32.png">
+
+  <title>C R E A T I V O L O G Y</title>
+</head>
+
+<body>
+
+  <!-- ================ HEADER ================ -->
+  <header class="header">
+    <div class="header__container container">
+      <a href="/" class="header__logo">
+        CREATIVOLOGY
+      </a>
+
+      <button 
+        type="button" 
+        class="nav__toggle"
+        aria-expanded="false"
+        aria-controls="nav"
+        aria-label="Open main menu"
+      >
+        <i class="ri-menu-line nav__burger" aria-hidden="true"></i>
+        <i class="ri-close-line nav__close" aria-hidden="true"></i>
+      </button>
+
+      <nav class="nav" id="nav" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="/" class="nav__link">home</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">about</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">portfolio</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">services</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">courses</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">blog</a></li>
+          <li class="nav__item"><a href="/contact.html" class="nav__link">connect</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ================ MAIN ================ -->
+  <main class="main">
+
+    <section class="contact section">
+        <div class="contact__container container">
+
+            <h1 class="contact__title">
+                Contact Creativeology
+            </h1>
+
+            <p class="contact__description">
+                Tell us a little about your project and what you’re looking to build — we’re 
+                looking forward to hearing from you. Or you can just email us at email 
+                <a href="mailto:hello@creativeology.com">hello@creativeology.com</a> 
+                and our team will respond shortly.
+            </p>
+
+            <form class="contact-form" action="" method="post">
+
+                <div class="contact-form__field">
+                    <label class="contact-form__label" for="firstname">
+                        Firstname *
+                    </label>
+
+                    <input 
+                        class="contact-form__input"
+                        type="text" 
+                        id="firstname"
+                        name="firstname" 
+                        placeholder="Enter your firstname"
+                        autocomplete="given-name"
+                        required
+                    >
+                </div>
+
+                <div class="contact-form__field">
+                    <label class="contact-form__label" for="lastname">
+                        Lastname *
+                    </label>
+
+                    <input 
+                        class="contact-form__input"
+                        type="text" 
+                        id="lastname"
+                        name="lastname" 
+                        placeholder="Enter your lastname"
+                        autocomplete="family-name"
+                        required
+                    >
+                </div>
+
+                <div class="contact-form__field">
+                    <label class="contact-form__label" for="email">
+                        Email *
+                    </label>
+
+                    <input 
+                        class="contact-form__input"
+                        type="email" 
+                        id="email"
+                        name="email" 
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="contact-form__field">
+                    <label class="contact-form__label" for="brand-name">
+                        Brand name *
+                    </label>
+
+                    <input 
+                        class="contact-form__input"
+                        type="text" 
+                        id="brand-name"
+                        name="brand-name" 
+                        placeholder="Enter your brand name"
+                        autocomplete="organization"
+                        required
+                    >
+                </div>
+
+                <div class="contact-form__field">
+                    <label class="contact-form__label" for="website">
+                        Website
+                    </label>
+
+                    <input 
+                        class="contact-form__input"
+                        type="url" 
+                        id="website"
+                        name="website" 
+                        placeholder="Enter your website"
+                        autocomplete="url"
+                    >
+                </div>
+
+                <!-- Checkbox element -->
+                <div class="contact-form__field">
+                    <p class="contact-form__label">
+                        Which services would you like our help with?
+                    </p>
+
+                    <label class="contact-form__checkbox">
+                        <input type="checkbox" name="services" value="social-management">
+                        Social Media Management
+                    </label>
+
+                    <label class="contact-form__checkbox">
+                        <input type="checkbox" name="services" value="social-strategy">
+                        Social Media Strategy
+                    </label>
+
+                    <label class="contact-form__checkbox">
+                        <input type="checkbox" name="services" value="content-creation">
+                        Content Creation
+                    </label>
+
+                    <label class="contact-form__checkbox">
+                        <input type="checkbox" name="services" value="influencer">
+                        Influencer Marketing
+                    </label>
+
+                    <label class="contact-form__checkbox">
+                        <input type="checkbox" name="services" value="email-sms">
+                        Email and SMS Marketing
+                    </label>
+
+                    <label class="contact-form__checkbox">
+                        <input type="checkbox" name="services" value="other">
+                        Other
+                    </label>
+                </div>
+
+                <!-- Textarea element -->
+                <div class="contact-form__field">
+                    <label class="contact-form__label" for="message">
+                        Message
+                    </label>
+
+                    <textarea 
+                        class="contact-form__textarea contact-form__field--full"
+                        id="message"
+                        name="message" 
+                        rows="5"
+                        placeholder="Enter your message"
+                        autocomplete="on"
+                    ></textarea>
+                </div>
+
+                <div class="contact-form__actions">
+                    <button class="button button--primary" type="submit">
+                        Submit
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </section>
+
+  </main>
+
+
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>
