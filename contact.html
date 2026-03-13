@@ -69,7 +69,7 @@
 
             <p class="contact__description">
                 Tell us a little about your project and what you’re looking to build — we’re 
-                looking forward to hearing from you. Or you can just email us at email 
+                looking forward to hearing from you. Or you can just email us at 
                 <a href="mailto:hello@creativeology.com">hello@creativeology.com</a> 
                 and our team will respond shortly.
             </p>
@@ -156,50 +156,71 @@
                 </div>
 
                 <!-- Checkbox element -->
-                <div class="contact-form__field">
-                    <p class="contact-form__label">
+                <fieldset class="contact-form__field contact-form__field--full">
+                    <legend class="contact-form__label">
                         Which services would you like our help with?
-                    </p>
+                    </legend>
 
                     <label class="contact-form__checkbox">
-                        <input type="checkbox" name="services" value="social-management">
+                        <input type="checkbox" name="services[]" value="social-management">
                         Social Media Management
                     </label>
 
                     <label class="contact-form__checkbox">
-                        <input type="checkbox" name="services" value="social-strategy">
+                        <input type="checkbox" name="services[]" value="social-strategy">
                         Social Media Strategy
                     </label>
 
-                    <label class="contact-form__checkbox">
-                        <input type="checkbox" name="services" value="content-creation">
+                    <label class="contact-form__checkbox">                                 <!-- ? why we need id="contentCreation" -->
+                        <input type="checkbox" name="services[]" value="content-creation" id="contentCreation">
                         Content Creation
                     </label>
 
                     <label class="contact-form__checkbox">
-                        <input type="checkbox" name="services" value="influencer">
+                        <input type="checkbox" name="services[]" value="influencer">
                         Influencer Marketing
                     </label>
 
                     <label class="contact-form__checkbox">
-                        <input type="checkbox" name="services" value="email-sms">
+                        <input type="checkbox" name="services[]" value="email-sms">
                         Email and SMS Marketing
                     </label>
 
                     <label class="contact-form__checkbox">
-                        <input type="checkbox" name="services" value="other">
+                        <input type="checkbox" name="services[]" value="other">
                         Other
                     </label>
+                </fieldset>
+
+                <!-- Conditional block (?) -->
+                <div 
+                    class="contact-form__field contact-form__field--full contact-form__conditional" 
+                    id="contentTypes"
+                    hidden
+                >
+                    <label class="contact-form__label">
+                        Rank the types of content you need
+                    </label>
+
+                    <select class="contact-form__input" name="content-priority">
+                        <option value="">Select priority</option>
+                        <option value="photography">Photography</option>
+                        <option value="videography">Videography</option>
+                        <option value="stop-motion">Stop Motion</option>
+                        <option value="motion-graphics">Motion Graphics</option>
+                        <option value="graphic-design">Graphic Design</option>
+                        <option value="other">Other</option>
+                    </select>
                 </div>
 
                 <!-- Textarea element -->
-                <div class="contact-form__field">
+                <div class="contact-form__field contact-form__field--full">
                     <label class="contact-form__label" for="message">
                         Message
                     </label>
 
                     <textarea 
-                        class="contact-form__textarea contact-form__field--full"
+                        class="contact-form__textarea"
                         id="message"
                         name="message" 
                         rows="5"

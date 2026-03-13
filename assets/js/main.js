@@ -468,3 +468,18 @@ Error message
 </p>
 */
 
+
+if (window.location.pathname.endsWith('/contact.html')) {
+    const contentCheckbox = document.querySelector('#contentCreation');
+    const contentTypes = document.querySelector('#contentTypes');
+
+    contentCheckbox.addEventListener('change', () => {
+        
+        if (contentCheckbox.checked) {
+            contentTypes.hidden = false;
+        } else {
+            contentTypes.hidden = true;
+        }
+
+    });
+}
