@@ -470,16 +470,39 @@ Error message
 
 
 if (window.location.pathname.endsWith('/contact.html')) {
-    const contentCheckbox = document.querySelector('#contentCreation');
-    const contentTypes = document.querySelector('#contentTypes');
+    // const contentCheckbox = document.querySelector('#contentCreation');
+    // const contentTypes = document.querySelector('#contentTypes');
 
-    contentCheckbox.addEventListener('change', () => {
+    // contentCheckbox.addEventListener('change', () => {
         
-        if (contentCheckbox.checked) {
-            contentTypes.hidden = false;
-        } else {
-            contentTypes.hidden = true;
-        }
+    //     if (contentCheckbox.checked) {
+    //         contentTypes.hidden = false;
+    //     } else {
+    //         contentTypes.hidden = true;
+    //     }
 
+    // });
+
+    
+    const selectWrappers = document.querySelectorAll('.contact-form__select-wrapper');
+
+    selectWrappers.forEach(wrapper => {
+        const select = wrapper.querySelector('.contact-form__select');
+
+        // Переключаем стрелку при клике (открытии)
+        select.addEventListener('click', () => {
+            wrapper.classList.toggle('is-active');
+        });
+
+        // Возвращаем стрелку назад, если фокус потерян (список закрылся)
+        select.addEventListener('blur', () => {
+            wrapper.classList.remove('is-active');
+        });
+
+        // Возвращаем стрелку назад после выбора значения (для UX)
+        select.addEventListener('change', () => {
+            wrapper.classList.remove('is-active');
+            select.blur(); // Опционально: убирает фокус после выбора
+        });
     });
 }

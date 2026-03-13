@@ -764,6 +764,15 @@ img {
     margin-bottom: 2rem;
 }
 
+.contact__link {
+    color: hsl(36, 50%, 38%);
+    border-bottom: 1px solid transparent; 
+    transition: border-color .3s;
+}
+.contact__link:hover {
+    border-color: hsl(36, 50%, 38%);
+}
+
 .contact-form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -796,17 +805,61 @@ img {
 
     font: inherit;
 
-    transition:
-        border-color .2s ease,
-        box-shadow .2s ease;
+    transition: border-color .2s, box-shadow .2s;
 }
 
 .contact-form__textarea {
     resize: vertical;
 }
 
+.contact-form__select-wrapper {
+    position: relative;
+}
+
+.contact-form__select {
+    width: 100%;
+    padding: .75rem 2.5rem .75rem 1rem; /* Увеличили правый паддинг, чтобы текст не наплывал на стрелку */
+
+    border: 1px solid hsl(0 0% 85%);
+    border-radius: .5rem;
+
+    font: inherit;
+    cursor: pointer;
+    appearance: none;
+    
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.contact-form__select-wrapper::after {
+    content: "";
+    position: absolute;
+
+    top: 50%;
+    right: 1.125rem;
+
+    width: .5rem;
+    height: .5rem;
+
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+
+    /* Начальное положение: стрелка вниз */
+    transform: translateY(-70%) rotate(45deg);
+
+    pointer-events: none;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+}
+
+/* Анимация: поворот стрелки при фокусе на селекте */
+.contact-form__select-wrapper.is-active::after {
+    transform: translateY(-30%) rotate(-135deg);
+}
+
+
 .contact-form__input:focus,
-.contact-form__textarea:focus {
+.contact-form__textarea:focus,
+.contact-form__select:focus {
     outline: none;
 
     border-color: hsl(36 44% 62%);
@@ -824,6 +877,9 @@ img {
     color: hsl(0 70% 55%);
 }
 
+/* .contact-form__input:invalid {
+    border-color: hsl(0 70% 55%);
+} */
 
 
 .contact-form__checkbox {
@@ -832,6 +888,10 @@ img {
     gap: .5rem;
 
     font-size: var(--small-font-size);
+}
+
+.contact-form__actions .button {
+    font: inherit;
 }
 
 @media (max-width: 767px) {
