@@ -812,13 +812,226 @@ img {
     resize: vertical;
 }
 
+/* fieldset and legend styles reset */
+.contact-form fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+    min-inline-size: 0;
+}
+
+.contact-form legend {
+    padding: 0;
+    margin-bottom: .5rem;
+}
+
+
+
+
+.contact-form__input:focus,
+.contact-form__textarea:focus {
+    outline: none;
+
+    border-color: hsl(36 44% 62%);
+
+    box-shadow: 0 0 0 3px hsl(36 44% 62% / 0.2);
+}
+
+.contact-form__input--error,
+.contact-form__textarea--error {
+    border-color: hsl(0 70% 55%);
+}
+
+.contact-form__error {
+    font-size: var(--small-font-size);
+    color: hsl(0 70% 55%);
+}
+
+/* .contact-form__input:invalid {
+    border-color: hsl(0 70% 55%);
+} */
+
+.contact-form__hint {
+    font-size: var(--small-font-size);
+    background-color: hsla(0, 0%, 100%, 0.8);
+    padding: .75rem;
+    border-radius: .5rem;
+}
+
+
+
+
+.contact-form__checkbox {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+    /* font-size: var(--small-font-size); */
+}
+
+.contact-form__checkbox input[type="checkbox"] {
+  /* Убираем стандартный вид */
+  appearance: none;
+  /* Устанавливаем размер квадрата */
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  display: inline-grid;
+  place-content: center;
+  transition: border-color 0.2s;
+}
+
+.contact-form__checkbox input[type="checkbox"]::before {
+  content: "";
+  /* Рисуем галочку через clip-path */
+  width: 0.8rem;
+  height: 0.8rem;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transform-origin: bottom left;
+  transition: 120ms transform ease-in-out;
+  /* Цвет самой галочки */
+  background-color: hsl(36 44% 62%);
+}
+
+.contact-form__checkbox input[type="checkbox"]:checked {
+  /* Цвет фона квадрата при выборе */
+  background-color: hsl(36 44% 95%);
+  border-color: hsl(36 44% 62%);
+}
+
+.contact-form__checkbox input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+/* Стили для фокуса (клавиатура) */
+.contact-form__checkbox input[type="checkbox"]:focus-visible {
+  /* outline: 2px solid hsl(36 44% 62%);
+  outline-offset: 2px; */
+  outline: none;
+  border-color: hsl(36 44% 62%);
+  box-shadow: 0 0 0 3px hsl(36 44% 62% / .3);
+}
+
+
+
+
+/* Radio group container */
+.contact-form__radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+/* Pill label */
+.contact-form__radio {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    padding: .75rem 1rem;
+
+    border: 1px solid hsl(0 0% 85%);
+    border-radius: 999px;
+    background-color: hsla(0, 0%, 100%, .5);
+
+    user-select: none;
+
+    transition: 
+        border-color .2s, 
+        background-color .2s,
+        transform .15s,
+        box-shadow .15s;
+
+    /* will-change: transform; */
+}
+
+/* Hide native input but keep focusable & clickable */
+.contact-form__radio-input {
+    position: absolute;
+    inset: 0;          /* fills the whole label */
+    opacity: 0;
+    cursor: pointer;   /* ensures pointer works */
+}
+
+/* Label text */
+.contact-form__radio-label {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    pointer-events: none;
+}
+
+.contact-form__radio-label::before {
+    content: "";
+
+    width: 1rem;
+    height: 1rem;
+
+    border-radius: 50%;
+    border: 2px solid hsl(0 0% 75%);
+
+    transition: 
+        border-color .2s, 
+        background-color .2s;
+}
+
+/* radio checked state */
+.contact-form__radio-input:checked
++ .contact-form__radio-label::before {
+    border-color: hsl(36 44% 62%);
+    background-color: hsl(36 44% 62%);
+}
+
+/* Checked pill effect using :has() */
+.contact-form__radio:has(.contact-form__radio-input:checked) {
+    border-color: hsl(36 44% 62%);
+    background-color: hsl(36 44% 95%);
+
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px hsl(0 0% 0% / 0.08);
+}
+
+/* Hover effect */
+.contact-form__radio:hover {
+    border-color: hsl(36 44% 62%);
+    transform: translateY(-1px);
+}
+
+/* Focus-visible for accessibility */
+.contact-form__radio:has(.contact-form__radio-input:focus-visible) {
+    box-shadow: 0 0 0 3px hsl(36 44% 62% / .3);
+}
+
+
+
+
+.contact-form__actions .button {
+    font: inherit;
+}
+
+@media (max-width: 767px) {
+    .contact-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+/* select element styles */
+/*
 .contact-form__select-wrapper {
     position: relative;
 }
 
 .contact-form__select {
     width: 100%;
-    padding: .75rem 2.5rem .75rem 1rem; /* Увеличили правый паддинг, чтобы текст не наплывал на стрелку */
+    padding: .75rem 2.5rem .75rem 1rem; / Увеличили правый паддинг, чтобы текст не наплывал на стрелку /
 
     border: 1px solid hsl(0 0% 85%);
     border-radius: .5rem;
@@ -843,7 +1056,7 @@ img {
     border-right: 2px solid currentColor;
     border-bottom: 2px solid currentColor;
 
-    /* Начальное положение: стрелка вниз */
+    / Начальное положение: стрелка вниз /
     transform: translateY(-70%) rotate(45deg);
 
     pointer-events: none;
@@ -851,14 +1064,11 @@ img {
     transform-origin: center;
 }
 
-/* Анимация: поворот стрелки при фокусе на селекте */
+/ Анимация: поворот стрелки при фокусе на селекте /
 .contact-form__select-wrapper.is-active::after {
     transform: translateY(-30%) rotate(-135deg);
 }
 
-
-.contact-form__input:focus,
-.contact-form__textarea:focus,
 .contact-form__select:focus {
     outline: none;
 
@@ -866,39 +1076,8 @@ img {
 
     box-shadow: 0 0 0 3px hsl(36 44% 62% / 0.2);
 }
+*/
 
-.contact-form__input--error,
-.contact-form__textarea--error {
-    border-color: hsl(0 70% 55%);
-}
-
-.contact-form__error {
-    font-size: var(--small-font-size);
-    color: hsl(0 70% 55%);
-}
-
-/* .contact-form__input:invalid {
-    border-color: hsl(0 70% 55%);
-} */
-
-
-.contact-form__checkbox {
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-
-    font-size: var(--small-font-size);
-}
-
-.contact-form__actions .button {
-    font: inherit;
-}
-
-@media (max-width: 767px) {
-    .contact-form {
-        grid-template-columns: 1fr;
-    }
-}
 
 
 
