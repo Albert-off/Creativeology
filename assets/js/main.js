@@ -128,6 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
         openClass: 'is-open',    // Можно переопределить при необходимости
         activeClass: 'is-active'
     });
+
+    new ContactForm('.contact-form');
 });
 
 
@@ -237,6 +239,269 @@ window.addEventListener('load', () => {
  * 
  * Это уже настоящий production компонент.
  */
+
+
+
+
+
+
+/**
+ * Класс управления контактной формой.
+ * Ответственность: валидация, обработка состояний полей, сабмит.
+ */
+class ContactForm {
+    constructor(formSelector) {
+        this.form = document.querySelector(formSelector);
+
+        if (!this.form) return;
+
+        // Конфигурация классов, чтобы не хардкодить их в методах
+        this.classes = {
+            inputError: 'contact-form__input--error',
+            errorText: 'contact-form__error'
+        };
+
+        // Селекторы для checkbox групп
+        this.checkboxFieldsets = {
+            services: {
+                el: this.form.querySelector('#services-fieldset'),
+                name: 'services'
+            },
+            contentTypes: {
+                el: this.form.querySelector('#content-types-fieldset'),
+                name: 'content_types',
+                triggerId: 'content-creation'
+            }
+        };
+
+        // this.fields = [...this.form.querySelectorAll('input, textarea')];
+
+        this._onSubmit = this.handleSubmit.bind(this);
+        this._onBlur = this.handleBlur.bind(this);
+        this._onChange = this.handleChange.bind(this);
+        this._onInput = this.handleInput.bind(this);
+
+        this.init();
+    }
+
+    init() {
+        this.form.removeEventListener('submit', this._onSubmit);
+
+        // Используем фазу погружения (capture) для событий, которые не всплывают (blur/focus)
+        // Либо используем focusout, который всплывает.
+        this.form.addEventListener('focusout', this._onBlur);
+        this.form.addEventListener('change', this._onChange);  // Для чекбоксов лучше change
+        this.form.addEventListener('input', this._onInput);
+
+        // this.form.addEventListener('change', (e) => this.handleChange(e));
+    }
+
+    destroy() {
+        this.form.removeEventListener('submit', this._onSubmit);
+        this.form.removeEventListener('focusout', this.handleBlur);
+        this.form.removeEventListener('input', this.handleInput);
+    }
+
+    // CHECKBOX FIELDSET
+    handleChange(event) {
+        const target = event.target;
+
+        // Условное отображение второй checkbox группы
+        if (target.id === this.checkboxFieldsets.contentTypes.triggerId) {
+            this.toggleConditionalFieldset(target.checked);
+        }
+
+        // Валидация групп чекбоксов при изменении
+        if (target.type === 'checkbox') {
+            const groupCheckboxEl = target.closest('fieldset');
+            if (groupCheckboxEl) this.validateCheckboxGroup(groupCheckboxEl);
+        }
+    }
+
+    // CHECKBOX FIELDSET
+    toggleConditionalFieldset(isVisible) {
+        const fieldset = this.checkboxFieldsets.contentTypes.el;
+        fieldset.hidden = !isVisible;
+        fieldset.setAttribute('aria-hidden', !isVisible);
+
+        if (!isVisible) {
+            // Сбрасываем значения, если секция скрыта
+            const inputs = fieldset.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.checked = false;
+                this.clearError(input);  // Очищаем старые ошибки
+            });
+        }
+    }
+
+    // CHECKBOX FIELDSET Валидация группы чекбоксов (минимум один выбран)
+    validateCheckboxGroup(groupEl) {
+        const checkboxes = groupEl.querySelectorAll('input[type="checkbox"]')
+        const isChecked = Array.from(checkboxes).some(cb => cb.checked);
+        const errorId = `${groupEl.id}-error`;
+
+        this.clearCheckboxGroupError(groupEl);
+
+        if (!isChecked) {
+            this.showCheckboxGroupError(groupEl, 'Please select at least one option.', errorId);
+            return false;
+        }
+        return true;
+    }
+
+    // CHECKBOX FIELDSET
+    showCheckboxGroupError(groupEl, message, errorId) {
+        groupEl.classList.add(this.classes.inputError);
+        
+        const errorElement = document.createElement('p');
+        errorElement.className = this.classes.errorText;
+        errorElement.id = errorId;
+        errorElement.textContent = message;
+        
+        groupEl.appendChild(errorElement);
+        groupEl.setAttribute('aria-invalid', 'true');
+        groupEl.setAttribute('aria-describedby', errorId);
+    }
+
+    // CHECKBOX FIELDSET
+    clearCheckboxGroupError(groupEl) {
+        groupEl.classList.remove(this.classes.inputError);
+        groupEl.removeAttribute('aria-invalid');
+        const error = groupEl.querySelector(`.${this.classes.errorText}`);
+        if (error) error.remove();
+    }
+
+    handleSubmit(event) {
+        let isFormValid = true;
+
+        // 1. Валидация стандартных полей
+        const fields = this.form.querySelectorAll('input:not([type="checkbox"]), textarea');
+        fields.forEach(field => {
+            if (!this.validateField(field)) isFormValid = false;
+        });
+
+        // 2. Валидация групп чекбоксов
+        if (!this.validateCheckboxGroup(this.checkboxFieldsets.services.el)) isFormValid = false;
+        
+        // Валидируем вторую группу, только если она видна
+        if (!this.checkboxFieldsets.contentTypes.el.hidden) {
+            if (!this.validateCheckboxGroup(this.checkboxFieldsets.contentTypes.el)) isFormValid = false;
+        }
+
+        if (!isFormValid) {
+            event.preventDefault();
+            const firstInvalid = this.form.querySelector(`.${this.classes.inputError}, :invalid`);
+            if (firstInvalid) firstInvalid.focus();
+        }
+    }
+
+
+
+    // handleSubmit(event) {
+    //     if (!this.form.checkValidity()) {
+    //         event.preventDefault();
+    //     }
+
+    //     // Валидируем все поля (используем стандартный селектор)
+    //     const fields = this.form.querySelectorAll('input, textarea');
+    //     fields.forEach(field => this.validateField(field));
+
+    //     const firstInvalid = this.form.querySelector(':invalid');
+    //     if (firstInvalid) firstInvalid.focus();
+    // }
+
+    handleBlur(event) {
+        if (this.isField(event.target)) {
+            this.validateField(event.target);
+        }
+    }
+
+    handleInput(event) {
+        const field = event.target;
+        // Перевалидируем "на лету" только если уже была показана ошибка
+        if (this.isField(field) && field.classList.contains(this.classes.inputError)) {
+            this.validateField(field);
+        }
+    }
+
+    isField(element) {
+        return element.tagName === 'INPUT' || element.tagName === 'TEXTAREA';
+    }
+
+    validateField(field) {
+        const message = this.getErrorMessage(field);
+
+        this.clearError(field);
+
+        if (!message) return;
+        
+        this.showError(field, message);
+    }
+
+    getErrorMessage(field) {
+        const { validity } = field;  // validity = field.validity;
+        if (validity.valid) return '';
+
+        if (validity.valueMissing) return 'This field is required.';
+
+        if (validity.typeMismatch || validity.badInput) {
+            if (field.type === 'email') return 'Please enter a valid email address.';
+            if (field.type === 'url') return 'Please enter a valid URL.';
+        }
+
+        if (validity.tooShort) return `Minimum length is ${field.minLength} characters.`;
+
+        return 'Invalid field.';
+    }
+
+    showError(field, message) {
+        const fieldWrapper = field.closest('.contact-form__field');
+        if (!fieldWrapper) return;
+
+        field.classList.add(this.classes.inputError);
+        field.setAttribute('aria-invalid', 'true');
+
+        // Создаем уникальный ID для ошибки для связи с input
+        const errorId = `${field.id || 'field'}-error`; // На случай, если у поля нет id
+
+        // Создаем элемент ошибки
+        const errorElement = document.createElement('p');
+        errorElement.className = this.classes.errorText;
+        errorElement.id = errorId;
+        errorElement.textContent = message;
+        fieldWrapper.appendChild(errorElement);
+
+        // Связываем инпут с текстом ошибки
+        field.setAttribute('aria-describedby', errorId);
+    }
+
+    clearError(field) {
+        field.classList.remove(this.classes.inputError);
+        field.removeAttribute('aria-invalid');
+        field.removeAttribute('aria-describedby');
+
+        const fieldWrapper = field.closest('.contact-form__field');
+        const errorElement = fieldWrapper?.querySelector(`.${this.classes.errorText}`);
+
+        if (errorElement) errorElement.remove();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // const wrapper = document.querySelector(".trustedby__wrapper");
@@ -469,40 +734,17 @@ Error message
 */
 
 
-if (window.location.pathname.endsWith('/contact.html')) {
-    // const contentCheckbox = document.querySelector('#contentCreation');
-    // const contentTypes = document.querySelector('#contentTypes');
+// if (window.location.pathname.endsWith('/contact.html')) {
+//     // const contentCheckbox = document.querySelector('#contentCreation');
+//     // const contentTypes = document.querySelector('#contentTypes');
 
-    // contentCheckbox.addEventListener('change', () => {
+//     // contentCheckbox.addEventListener('change', () => {
         
-    //     if (contentCheckbox.checked) {
-    //         contentTypes.hidden = false;
-    //     } else {
-    //         contentTypes.hidden = true;
-    //     }
+//     //     if (contentCheckbox.checked) {
+//     //         contentTypes.hidden = false;
+//     //     } else {
+//     //         contentTypes.hidden = true;
+//     //     }
 
-    // });
-
-    
-    const selectWrappers = document.querySelectorAll('.contact-form__select-wrapper');
-
-    selectWrappers.forEach(wrapper => {
-        const select = wrapper.querySelector('.contact-form__select');
-
-        // Переключаем стрелку при клике (открытии)
-        select.addEventListener('click', () => {
-            wrapper.classList.toggle('is-active');
-        });
-
-        // Возвращаем стрелку назад, если фокус потерян (список закрылся)
-        select.addEventListener('blur', () => {
-            wrapper.classList.remove('is-active');
-        });
-
-        // Возвращаем стрелку назад после выбора значения (для UX)
-        select.addEventListener('change', () => {
-            wrapper.classList.remove('is-active');
-            select.blur(); // Опционально: убирает фокус после выбора
-        });
-    });
-}
+//     // });
+// }
