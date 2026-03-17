@@ -1050,6 +1050,12 @@ img {
     .contact-form {
         grid-template-columns: 1fr;
     }
+    
+    .contact-form__checkbox-group,
+    .contact-form__radio-group {
+        grid-template-columns: 1fr;
+    }
+
 }
 
 
