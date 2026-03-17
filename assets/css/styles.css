@@ -776,7 +776,7 @@ img {
 .contact-form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
+    gap: 2rem;
     /* max-width: 600px; */
 }
 
@@ -791,6 +791,7 @@ img {
 }
 
 .contact-form__label {
+    color: hsl(50, 10%, 20%);
     font-weight: var(--font-medium);
 }
 
@@ -843,7 +844,7 @@ img {
 }
 
 .contact-form__error {
-    font-size: var(--small-font-size);
+    font-size: var(--smaller-font-size);
     color: hsl(0 70% 55%);
 }
 
@@ -852,31 +853,43 @@ img {
 } */
 
 .contact-form__hint {
-    font-size: var(--small-font-size);
-    background-color: hsla(0, 0%, 100%, 0.8);
+    font-size: var(--smaller-font-size);
     padding: .75rem;
+    
+    color: hsla(50, 10%, 20%, .9);
     border-radius: .5rem;
+    background-color: hsla(50, 20%, 90%);
 }
 
 
 
+/* Checkbox group container */
+.contact-form__checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .5rem;
+}
 
 .contact-form__checkbox {
     display: flex;
     align-items: center;
     gap: .5rem;
-
-    /* font-size: var(--small-font-size); */
+    cursor: pointer;
+    border-radius: .25rem;
 }
 
-.contact-form__checkbox input[type="checkbox"] {
+.contact-form__checkbox:hover {
+    background-color: hsl(31, 75%, 89%);
+}
+
+.contact-form__checkbox-input {
   /* Убираем стандартный вид */
   appearance: none;
   /* Устанавливаем размер квадрата */
   width: 1.5rem;
   height: 1.5rem;
   border: 2px solid #ccc;
-  border-radius: 4px;
+  border-radius: .25rem;
   background-color: #fff;
   cursor: pointer;
   display: inline-grid;
@@ -884,7 +897,7 @@ img {
   transition: border-color 0.2s;
 }
 
-.contact-form__checkbox input[type="checkbox"]::before {
+.contact-form__checkbox-input::before {
   content: "";
   /* Рисуем галочку через clip-path */
   width: 0.8rem;
@@ -897,18 +910,18 @@ img {
   background-color: hsl(36 44% 62%);
 }
 
-.contact-form__checkbox input[type="checkbox"]:checked {
+.contact-form__checkbox-input:checked {
   /* Цвет фона квадрата при выборе */
   background-color: hsl(36 44% 95%);
   border-color: hsl(36 44% 62%);
 }
 
-.contact-form__checkbox input[type="checkbox"]:checked::before {
+.contact-form__checkbox-input:checked::before {
   transform: scale(1);
 }
 
 /* Стили для фокуса (клавиатура) */
-.contact-form__checkbox input[type="checkbox"]:focus-visible {
+.contact-form__checkbox-input:focus-visible {
   /* outline: 2px solid hsl(36 44% 62%);
   outline-offset: 2px; */
   outline: none;
@@ -917,12 +930,27 @@ img {
 }
 
 
+/* -- hide and show the second checkbox fieldset -- */
+#content-types-fieldset[hidden] {
+    display: none;
+}
+#content-types-fieldset {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
 
 
 /* Radio group container */
 .contact-form__radio-group {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: .5rem;
 }
 
@@ -1009,6 +1037,10 @@ img {
 
 
 
+.contact-form__actions {
+    grid-column: 1 / -1;
+    margin-left: auto;
+}
 
 .contact-form__actions .button {
     font: inherit;
@@ -1022,61 +1054,6 @@ img {
 
 
 
-
-/* select element styles */
-/*
-.contact-form__select-wrapper {
-    position: relative;
-}
-
-.contact-form__select {
-    width: 100%;
-    padding: .75rem 2.5rem .75rem 1rem; / Увеличили правый паддинг, чтобы текст не наплывал на стрелку /
-
-    border: 1px solid hsl(0 0% 85%);
-    border-radius: .5rem;
-
-    font: inherit;
-    cursor: pointer;
-    appearance: none;
-    
-    transition: border-color .2s, box-shadow .2s;
-}
-
-.contact-form__select-wrapper::after {
-    content: "";
-    position: absolute;
-
-    top: 50%;
-    right: 1.125rem;
-
-    width: .5rem;
-    height: .5rem;
-
-    border-right: 2px solid currentColor;
-    border-bottom: 2px solid currentColor;
-
-    / Начальное положение: стрелка вниз /
-    transform: translateY(-70%) rotate(45deg);
-
-    pointer-events: none;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center;
-}
-
-/ Анимация: поворот стрелки при фокусе на селекте /
-.contact-form__select-wrapper.is-active::after {
-    transform: translateY(-30%) rotate(-135deg);
-}
-
-.contact-form__select:focus {
-    outline: none;
-
-    border-color: hsl(36 44% 62%);
-
-    box-shadow: 0 0 0 3px hsl(36 44% 62% / 0.2);
-}
-*/
 
 
 
