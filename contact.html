@@ -27,7 +27,7 @@
   <!-- ================ HEADER ================ -->
   <header class="header">
     <div class="header__container container">
-      <a href="/Creativeology" class="header__logo">
+      <a href="../" class="header__logo">
         CREATIVOLOGY
       </a>
 
@@ -44,7 +44,7 @@
 
       <nav class="nav" id="nav" aria-label="Main navigation">
         <ul class="nav__list">
-          <li class="nav__item"><a href="/Creativeology" class="nav__link">home</a></li>
+          <li class="nav__item"><a href="../" class="nav__link">home</a></li>
           <li class="nav__item"><a href="#" class="nav__link">about</a></li>
           <li class="nav__item"><a href="#" class="nav__link">portfolio</a></li>
           <li class="nav__item"><a href="#" class="nav__link">services</a></li>
@@ -142,7 +142,8 @@
 
                 <div class="contact-form__field contact-form__field--full">
                     <label class="contact-form__label" for="website">
-                        Website (optional)
+                        Website 
+                        <span class="contact-form__label-suffix">(optional)</span>
                     </label>
 
                     <input 
@@ -227,9 +228,28 @@
                                 type="checkbox" 
                                 name="services[]" 
                                 value="other-service"
+
+                                id="service-other-checkbox"
+                                aria-expanded="false"
+                                aria-controls="service-other-wrapper"
                             >
                             Other (please specify)
                         </label>
+
+                        <!-- hidden service other input -->
+                        <div 
+                            class="contact-form__field contact-form__field--full contact-form__field--conditional" 
+                            id="service-other-wrapper" 
+                            hidden
+                        >
+                            <input 
+                                type="text" 
+                                name="services_other" 
+                                class="contact-form__input" 
+                                placeholder="Please specify the service"
+                                aria-label="Other service details"
+                            >
+                        </div>
                     </div>
                 </fieldset>
 
@@ -307,9 +327,28 @@
                                 type="checkbox" 
                                 name="content_types[]" 
                                 value="other-content"
+
+                                id="content-other-checkbox"
+                                aria-expanded="false"
+                                aria-controls="content-other-wrapper"
                             >
                             Other (please specify)
                         </label>
+
+                        <!-- hidden content type other input -->
+                        <div 
+                            class="contact-form__field contact-form__field--full contact-form__field--conditional" 
+                            id="content-other-wrapper" 
+                            hidden
+                        >
+                            <input 
+                                type="text" 
+                                name="content_types_other" 
+                                class="contact-form__input" 
+                                placeholder="Please specify content types"
+                                aria-label="Other content details"
+                            >
+                        </div>
                     </div>
                 </fieldset>
 
