@@ -795,6 +795,11 @@ img {
     font-weight: var(--font-medium);
 }
 
+.contact-form__label-suffix {
+    color: hsla(50, 10%, 20%, .8);
+    font-weight: normal;
+}
+
 .contact-form__input,
 .contact-form__textarea {
     width: 100%;
@@ -863,6 +868,7 @@ img {
 
 
 
+
 /* Checkbox group container */
 .contact-form__checkbox-group {
     display: grid;
@@ -878,8 +884,17 @@ img {
     border-radius: .25rem;
 }
 
-.contact-form__checkbox:hover {
-    background-color: hsl(31, 75%, 89%);
+/* 1. Состояние при наведении (только для устройств с мышкой) | Desktop */
+@media (hover: hover) {
+    .contact-form__checkbox:hover {
+        background-color: hsl(31, 75%, 89%);
+    }
+}
+/* 2. Состояние при нажатии (pointer: coarse означает "грубый указатель", т.е. палец) | Mobile/Tablet */
+@media (pointer: coarse) {
+    .contact-form__checkbox:active {
+        background-color: hsl(31, 75%, 89%);
+    }
 }
 
 .contact-form__checkbox-input {
@@ -943,6 +958,20 @@ img {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+
+
+/* -- Условные поля other -- */
+.contact-form__field--conditional {
+    margin-top: .25rem;
+}
+
+/* Анимация (используем уже имеющийся fadeIn) */
+.contact-form__field--conditional:not([hidden]) {
+    display: flex;
+    animation: fadeIn 0.3s ease forwards;
+}
+
 
 
 
@@ -1050,12 +1079,11 @@ img {
     .contact-form {
         grid-template-columns: 1fr;
     }
-    
+
     .contact-form__checkbox-group,
     .contact-form__radio-group {
         grid-template-columns: 1fr;
     }
-
 }
 
 
