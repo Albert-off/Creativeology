@@ -935,7 +935,7 @@ img {
     display: none;
 }
 #content-types-fieldset {
-    display: block;
+    display: flex;
     animation: fadeIn 0.3s ease;
 }
 
