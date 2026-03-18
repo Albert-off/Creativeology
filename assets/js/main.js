@@ -262,15 +262,23 @@ class ContactForm {
         };
 
         // Селекторы для checkbox групп
-        this.checkboxFieldsets = {
+        this.groups = {
             services: {
                 el: this.form.querySelector('#services-fieldset'),
-                name: 'services'
+                // Добавляем описание "Other" поля для этой группы
+                other: {
+                    checkboxId: 'service-other-checkbox',
+                    wrapperId: 'service-other-wrapper'
+                }
             },
             contentTypes: {
                 el: this.form.querySelector('#content-types-fieldset'),
-                name: 'content_types',
-                triggerId: 'content-creation'
+                triggerId: 'content-creation',
+                // Добавляем описание "Other" поля для этой группы
+                other: {
+                    checkboxId: 'content-other-checkbox',
+                    wrapperId: 'content-other-wrapper'
+                }
             }
         };
 
@@ -285,7 +293,7 @@ class ContactForm {
     }
 
     init() {
-        this.form.removeEventListener('submit', this._onSubmit);
+        this.form.addEventListener('submit', this._onSubmit);
 
         // Используем фазу погружения (capture) для событий, которые не всплывают (blur/focus)
         // Либо используем focusout, который всплывает.
@@ -298,29 +306,62 @@ class ContactForm {
 
     destroy() {
         this.form.removeEventListener('submit', this._onSubmit);
-        this.form.removeEventListener('focusout', this.handleBlur);
-        this.form.removeEventListener('input', this.handleInput);
+        this.form.removeEventListener('focusout', this._onBlur);
+        this.form.removeEventListener('change', this._onChange);
+        this.form.removeEventListener('input', this._onInput);
     }
 
     // CHECKBOX FIELDSET
     handleChange(event) {
         const target = event.target;
 
-        // Условное отображение второй checkbox группы
-        if (target.id === this.checkboxFieldsets.contentTypes.triggerId) {
+        // 1. Условное отображение второй checkbox группы (Content Creation)
+        if (target.id === this.groups.contentTypes.triggerId) {
             this.toggleConditionalFieldset(target.checked);
         }
 
-        // Валидация групп чекбоксов при изменении
+        // 2. Управление полями "Other"
+        this.handleOtherFieldsToggle(target);
+
+        // 3. Валидация групп чекбоксов при изменении
         if (target.type === 'checkbox') {
             const groupCheckboxEl = target.closest('fieldset');
             if (groupCheckboxEl) this.validateCheckboxGroup(groupCheckboxEl);
         }
     }
 
+    // OTHER CHECKBOXES
+    handleOtherFieldsToggle(target) {
+        // Итерируем по группам, чтобы найти соответствие
+        Object.values(this.groups).forEach(group => {
+            if (group.other && target.id === group.other.checkboxId) {
+                const wrapper = this.form.querySelector(`#${group.other.wrapperId}`);
+                const input = wrapper?.querySelector('input');
+
+                if (!wrapper || !input) return;
+
+                const isVisible = target.checked;
+                wrapper.hidden = !isVisible;
+                target.setAttribute('aria-expanded', isVisible);
+
+                if (isVisible) {
+                    input.disabled = false;
+                    input.focus();
+                    // Делаем поле обязательным, если выбран "Other"
+                    input.required = true;
+                } else {
+                    input.disabled = true;
+                    input.required = false;
+                    input.value = '';
+                    this.clearError(input);
+                }
+            }
+        });
+    }
+
     // CHECKBOX FIELDSET
     toggleConditionalFieldset(isVisible) {
-        const fieldset = this.checkboxFieldsets.contentTypes.el;
+        const fieldset = this.groups.contentTypes.el;
         fieldset.hidden = !isVisible;
         fieldset.setAttribute('aria-hidden', !isVisible);
 
@@ -371,44 +412,52 @@ class ContactForm {
         if (error) error.remove();
     }
 
+    // + FOR CHECKBOX FIELDSET
     handleSubmit(event) {
         let isFormValid = true;
 
-        // 1. Валидация стандартных полей
-        const fields = this.form.querySelectorAll('input:not([type="checkbox"]), textarea');
-        fields.forEach(field => {
-            if (!this.validateField(field)) isFormValid = false;
+        // 1. Валидация всех текстовых полей и textarea
+        // Исключаем чекбоксы и радио, так как у них своя логика в fieldset
+        const inputs = this.form.querySelectorAll('input:not([type="checkbox"]):not([type="radio"]), textarea');
+        inputs.forEach(input => {
+            if (!this.validateField(input)) isFormValid = false;
         });
 
         // 2. Валидация групп чекбоксов
-        if (!this.validateCheckboxGroup(this.checkboxFieldsets.services.el)) isFormValid = false;
+        if (!this.validateCheckboxGroup(this.groups.services.el)) isFormValid = false;
         
         // Валидируем вторую группу, только если она видна
-        if (!this.checkboxFieldsets.contentTypes.el.hidden) {
-            if (!this.validateCheckboxGroup(this.checkboxFieldsets.contentTypes.el)) isFormValid = false;
+        if (!this.groups.contentTypes.el.hidden) {
+            if (!this.validateCheckboxGroup(this.groups.contentTypes.el)) isFormValid = false;
         }
 
         if (!isFormValid) {
             event.preventDefault();
-            const firstInvalid = this.form.querySelector(`.${this.classes.inputError}, :invalid`);
+            // Фокус на первый невалидный элемент (для A11y)
+            const firstInvalid = this.form.querySelector(`.${this.classes.inputError}, :invalid:not(fieldset)`);
             if (firstInvalid) firstInvalid.focus();
         }
     }
 
+    // ... Ваши существующие методы validateField, showError, clearError ...
+    // Важно: в validateField добавьте проверку, чтобы она не пыталась валидировать скрытые поля
 
 
-    // handleSubmit(event) {
-    //     if (!this.form.checkValidity()) {
-    //         event.preventDefault();
-    //     }
 
-    //     // Валидируем все поля (используем стандартный селектор)
-    //     const fields = this.form.querySelectorAll('input, textarea');
-    //     fields.forEach(field => this.validateField(field));
+    /*     
+    handleSubmit(event) {
+        if (!this.form.checkValidity()) {
+            event.preventDefault();
+        }
 
-    //     const firstInvalid = this.form.querySelector(':invalid');
-    //     if (firstInvalid) firstInvalid.focus();
-    // }
+        // Валидируем все поля (используем стандартный селектор)
+        const fields = this.form.querySelectorAll('input, textarea');
+        fields.forEach(field => this.validateField(field));
+
+        const firstInvalid = this.form.querySelector(':invalid');
+        if (firstInvalid) firstInvalid.focus();
+    } 
+    */
 
     handleBlur(event) {
         if (this.isField(event.target)) {
@@ -429,13 +478,19 @@ class ContactForm {
     }
 
     validateField(field) {
-        const message = this.getErrorMessage(field);
+        // Senior tip: игнорируем поля, которые отключены или скрыты родителем
+        if (field.disabled || field.closest('[hidden]')) {
+            this.clearError(field);
+            return true;
+        }
 
+        const message = this.getErrorMessage(field);
         this.clearError(field);
 
         if (!message) return;
         
         this.showError(field, message);
+        return false;
     }
 
     getErrorMessage(field) {
@@ -472,7 +527,10 @@ class ContactForm {
         fieldWrapper.appendChild(errorElement);
 
         // Связываем инпут с текстом ошибки
-        field.setAttribute('aria-describedby', errorId);
+        const existing = field.getAttribute('aria-describedby');
+        const describedby = existing ? `${existing} ${errorId}` : errorId;
+
+        field.setAttribute('aria-describedby', describedby);
     }
 
     clearError(field) {
