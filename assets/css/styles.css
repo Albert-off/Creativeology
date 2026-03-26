@@ -803,6 +803,7 @@ img {
     gap: 1rem;
 
     padding: 2rem;
+    background-color: #EBE9E0;
     background: linear-gradient(to right, #F5F4F0, #EBE9E0);
 }
 
