@@ -1179,9 +1179,9 @@ class ContactForm {
 
 
 
-const form = document.querySelector('.contact-form');
-const fields = Array.from(form.elements);
-console.log(fields)
+// const form = document.querySelector('.contact-form');
+// const fields = Array.from(form.elements);
+// console.log(fields)
 
 
 

@@ -33,14 +33,16 @@
     /*.5rem = 8px | 1rem = 16px ...*/
     --body-font: "Poppins", sans-serif;
     --big-font-size: 2rem;
-    --h1-font-size: 1.5rem;
-    --h2-font-size: 1.25rem;
-    --h3-font-size: 1rem;
-    --normal-font-size: .938rem;
+    --h1-font-size: 1.75rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --h4-font-size: 1rem;
+
+    /* 16px 13px 12px */
+    --normal-font-size: 1rem;
     --small-font-size: .813rem;
     --smaller-font-size: .75rem;
 
-    --input-font-size: 1rem;
     --nav-logo-font-size: 1.4rem;
   
     /*========== Typography ==========*/
@@ -74,10 +76,13 @@
 @media screen and (min-width: 968px) {
     :root {
         --big-font-size: 3.5rem;
-        --h1-font-size: 2.25rem;
-        --h2-font-size: 1.5rem;
-        --h3-font-size: 1.25rem;
-        --normal-font-size: 1rem;
+        --h1-font-size: 2.5rem;
+        --h2-font-size: 2.25rem;
+        --h3-font-size: 1.5rem;
+        --h4-font-size: 1.25rem;
+
+        /* 17px 14px 13px */
+        --normal-font-size: 1.063rem;
         --small-font-size: .875rem;
         --smaller-font-size: .813rem;
         
@@ -117,22 +122,30 @@ button {
     border: none;
 }
 
-h1 {
+h1,
+h2 {
     font-family: "Playfair Display", serif;
-    font-size: var(--h1-font-size);
     font-weight: var(--font-semi-bold);
     color: var(--color-heading-primary);
 }
 
+h1 {
+    font-size: var(--h1-font-size);
+}
+
 h2 {
-    color: var(--color-heading-secondary);
     font-size: var(--h2-font-size);
-    font-weight: var(--font-regular);
 }
 
 h3 {
-    color: var(--color-heading-primary);
+    color: var(--color-heading-secondary);
     font-size: var(--h3-font-size);
+    font-weight: var(--font-regular);
+}
+
+h4 {
+    color: var(--color-heading-primary);
+    font-size: var(--h4-font-size);
     font-weight: var(--font-medium);
 }
 
@@ -171,7 +184,6 @@ img {
     padding: .5rem 1rem;
 
     font-family: inherit;
-    font-size: var(--input-font-size);
     font-weight: var(--font-medium);
 
     border-radius: .5rem;
@@ -831,7 +843,6 @@ img {
     border-radius: .5rem;
 
     font: inherit;
-    font-size: var(--input-font-size);
 
     transition: border-color .2s, box-shadow .2s;
 }
@@ -875,11 +886,6 @@ img {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: .5rem;
-}
-
-.contact-form__checkbox,
-.contact-form__radio {
-    font-size: var(--input-font-size);
 }
 
 
