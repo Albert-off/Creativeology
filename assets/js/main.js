@@ -623,12 +623,6 @@ class ContactForm {
         'other-service': (value) => ContactForm.validateOtherField(value, 'service'),
         'other-content': (value) => ContactForm.validateOtherField(value, 'content type'),
         message: (value) => ContactForm.validateMessage(value)
-
-        // 'brand-name': (value) => {
-        //     return /testing/i.test(value)
-        //     ? 'Brand name cannot contain the word "testing".'
-        //     : '';
-        // },
     };
 
     static validateName(rawValue, label) {
@@ -1182,6 +1176,24 @@ class ContactForm {
 // const form = document.querySelector('.contact-form');
 // const fields = Array.from(form.elements);
 // console.log(fields)
+
+
+/* const form = document.querySelector('.contact-form');
+const elements = Array.from(form.elements);
+
+console.log("elements:", elements);
+
+
+const fields = [...form.querySelectorAll('input, textarea')];
+console.log("fields:", fields);
+
+
+const fieldsets = new Map();
+form.querySelectorAll('[data-fieldset]').forEach(el => {
+    fieldsets.set(el.dataset.fieldset, el);
+});
+console.log("fieldsets:", fieldsets); */
+
 
 
 
