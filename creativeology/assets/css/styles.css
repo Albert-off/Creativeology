@@ -670,7 +670,7 @@ img {
 
 
 
-/* ================ SERVICES ================ */
+/* ================ SERVICES PREVIEW ================ */
 .services__header {
     margin-bottom: 2rem;
 }
@@ -775,7 +775,22 @@ img {
 
 
 
-/* ================ PORTFOLIO ================ */
+/* ================ ABOUT PAGE ================ */
+.about__title {
+    margin-bottom: 1rem;
+}
+
+.about__container h2 {
+    margin-bottom: .5rem;
+}
+
+.about__container p {
+    margin-bottom: 1rem;
+}
+
+
+
+/* ================ PORTFOLIO PAGE ================ */
 .portfolio__title {
     margin-bottom: 1rem;
 }
@@ -786,7 +801,6 @@ img {
 .portfolio__description p + p {
     margin-top: 1rem;
 }
-
 
 
 /* .portfolio__grid {
@@ -876,7 +890,7 @@ img {
 
 
 
-/* ================ CONTACT ================ */
+/* ================ CONTACT PAGE ================ */
 .contact__title {
     margin-bottom: 1rem;
 }
