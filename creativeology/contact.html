@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!--=============== PRIMARY META TAGS ===============-->
+  <meta name="title" content="C R E A T I V O L O G Y">
+  <meta name="description" content="A creative agency/content studio helping you grow your brand online">
+
+  <!--=============== REMIXICONS ===============-->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!--=============== CSS ===============-->
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <!--=============== FAVICONS ===============-->
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/fl1/favicon-16x16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/fl1/favicon-32x32.png">
+
+  <title>C R E A T I V O L O G Y</title>
+</head>
+
+<body>
+
+  <!-- ================ HEADER ================ -->
+  <header class="header">
+    <div class="header__container container">
+      <a href="index.html" class="header__logo">
+        CREATIVOLOGY
+      </a>
+
+      <button 
+        type="button" 
+        class="nav__toggle"
+        aria-expanded="false"
+        aria-controls="nav"
+        aria-label="Open main menu"
+      >
+        <i class="ri-menu-line nav__burger" aria-hidden="true"></i>
+        <i class="ri-close-line nav__close" aria-hidden="true"></i>
+      </button>
+
+      <nav class="nav" id="nav" aria-label="Main navigation">
+        <ul class="nav__list">
+          <li class="nav__item"><a href="index.html" class="nav__link">home</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">about</a></li>
+          <li class="nav__item"><a href="portfolio.html" class="nav__link">portfolio</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">services</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">courses</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">blog</a></li>
+          <li class="nav__item"><a href="#" class="nav__link">connect</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ================ MAIN ================ -->
+  <main class="main">
+
+    <section class="contact section">
+        <div class="contact__container container">
+
+            <h1 class="contact__title" id="contact-title">
+                Contact Creativeology
+            </h1>
+
+            <p class="contact__description">
+                Tell us a little about your project and what you’re looking to build — we’re 
+                looking forward to hearing from you. Or you can just email us at 
+                <a href="mailto:hello@creativeology.com" class="contact__link">hello@creativeology.com</a> 
+                and our team will respond shortly.
+            </p>
+
+            <form class="contact-form" action="#" method="post" aria-labelledby="contact-title" novalidate>
+
+                <!-- BASIC FIELDS -->
+
+                <div class="contact-form__field">
+                    <label class="contact-form__label" for="first_name">
+                        First Name
+                    </label>
+
+                    <input 
+                        class="contact-form__input"
+                        type="text"
+                        id="first_name"
+                        name="first_name"
+                        placeholder="Enter your first name"
+                        autocomplete="given-name"
+                        required
+
+                        data-purpose="first-name"
+                    >
+                </div>
+
+                <div class="contact-form__field">
+                    <label class="contact-form__label" for="last_name">
+                        Last Name
+                    </label>
+
+                    <input 
+                        class="contact-form__input"
+                        type="text"
+                        id="last_name"
+                        name="last_name"
+                        placeholder="Enter your last name"
+                        autocomplete="family-name"
+                        required
+
+                        data-purpose="last-name"
+                    >
+                </div>
+
+                <div class="contact-form__field">
+                    <label class="contact-form__label" for="email">
+                        Email
+                    </label>
+
+                    <input 
+                        class="contact-form__input"
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+
+                        data-purpose="email"
+                    >
+                </div>
+
+                <div class="contact-form__field">
+                    <label class="contact-form__label" for="brand_name">
+                        Brand Name
+                    </label>
+
+                    <input 
+                        class="contact-form__input"
+                        type="text"
+                        id="brand_name"
+                        name="brand_name"
+                        placeholder="Enter your brand name"
+                        autocomplete="organization"
+                        required
+
+                        data-purpose="brand-name"
+                    >
+                </div>
+
+                <div class="contact-form__field contact-form__field--full">
+                    <label class="contact-form__label" for="website">
+                        Website 
+                        <span class="contact-form__label-suffix">(optional)</span>
+                    </label>
+
+                    <input 
+                        class="contact-form__input"
+                        type="text"
+                        inputmode="url" 
+                        id="website"
+                        name="website" 
+                        placeholder="Enter your website — example.com"
+                        autocomplete="url"
+
+                        data-purpose="website"
+                    >
+                </div>
+
+                <!-- SERVICES -->
+
+                <fieldset 
+                    class="contact-form__field contact-form__field--full" 
+                    aria-describedby="services-hint"
+                    data-fieldset="services"
+                >
+                    <legend class="contact-form__label">
+                        Which services would you like our help with?
+                    </legend>
+
+                    <p class="contact-form__hint" id="services-hint">
+                        Choose as many as you like
+                    </p>
+
+                    <div class="contact-form__checkbox-group">
+                        <label class="contact-form__checkbox">
+                            <input 
+                                class="contact-form__checkbox-input"
+                                type="checkbox" 
+                                name="services[]" 
+                                value="social-management"
+                            >
+                            Social Media Management
+                        </label>
+    
+                        <label class="contact-form__checkbox">
+                            <input 
+                                class="contact-form__checkbox-input"
+                                type="checkbox" 
+                                name="services[]" 
+                                value="social-strategy"
+                            >
+                            Social Media Strategy
+                        </label>
+    
+                        <label class="contact-form__checkbox">
+                            <input 
+                                class="contact-form__checkbox-input"
+                                type="checkbox"
+                                name="services[]"
+                                value="content-creation"
+
+                                aria-controls="content-types-fieldset"
+                                aria-expanded="false"
+
+                                data-logic="toggle-section"
+                            >
+                            Content Creation
+                        </label>
+    
+                        <label class="contact-form__checkbox">
+                            <input 
+                                class="contact-form__checkbox-input"
+                                type="checkbox" 
+                                name="services[]" 
+                                value="influencer"
+                            >
+                            Influencer Marketing
+                        </label>
+    
+                        <label class="contact-form__checkbox">
+                            <input 
+                                class="contact-form__checkbox-input"
+                                type="checkbox" 
+                                name="services[]" 
+                                value="email-sms"
+                            >
+                            Email and SMS Marketing
+                        </label>
+    
+                        <label class="contact-form__checkbox">
+                            <input 
+                                class="contact-form__checkbox-input"
+                                type="checkbox" 
+                                name="services[]" 
+                                value="other-service"
+
+                                aria-controls="services-other-input"
+                                aria-expanded="false"
+
+                                data-logic="show-other"
+                            >
+                            Other
+                        </label>
+
+                        <!-- OTHER SERVICE -->
+                        <div 
+                            id="services-other-input"
+                            class="contact-form__field--full contact-form__field--conditional"
+                            
+                            hidden
+                        >
+                            <input 
+                                class="contact-form__input" 
+                                type="text" 
+                                name="services_other" 
+                                placeholder="Describe the service"
+                                aria-label="Describe the service"
+                                disabled
+
+                                data-purpose="other-service"
+                            >
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- CONTENT TYPES -->
+
+                <fieldset 
+                    id="content-types-fieldset"
+                    class="contact-form__field contact-form__field--full" 
+
+                    aria-describedby="content-types-hint"
+                    data-fieldset="content-types"
+
+                    disabled
+                    hidden
+                >
+                    <legend class="contact-form__label">
+                        If you’re interested in content creation, what types of content would you like us to produce?
+                    </legend>
+
+                    <p class="contact-form__hint" id="content-types-hint">
+                        Select all that apply or just continue onto the next question if unsure
+                    </p>
+
+                    <div class="contact-form__checkbox-group">
+                        <label class="contact-form__checkbox">
+                            <input 
+                                class="contact-form__checkbox-input" 
+                                type="checkbox" 
+                                name="content_types[]" 
+                                value="photography"
+                            >
+                            Photography
+                        </label>
+    
+                        <label class="contact-form__checkbox">
+                            <input 
+                                class="contact-form__checkbox-input" 
+                                type="checkbox" 
+                                name="content_types[]" 
+                                value="videography"
+                            >
+                            Videography
+                        </label>
+    
+                        <label class="contact-form__checkbox">
+                            <input
+                                class="contact-form__checkbox-input"  
+                                type="checkbox" 
+                                name="content_types[]" 
+                                value="stop-motion"
+                            >
+                            Stop Motion
+                        </label>
+    
+                        <label class="contact-form__checkbox">
+                            <input
+                                class="contact-form__checkbox-input"  
+                                type="checkbox" 
+                                name="content_types[]" 
+                                value="motion-graphics"
+                            >
+                            Motion Graphics
+                        </label>
+    
+                        <label class="contact-form__checkbox">
+                            <input
+                                class="contact-form__checkbox-input"  
+                                type="checkbox" 
+                                name="content_types[]" 
+                                value="graphic-design"
+                            >
+                            Graphic Design
+                        </label>
+    
+                        <label class="contact-form__checkbox">
+                            <input
+                                class="contact-form__checkbox-input"  
+                                type="checkbox" 
+                                name="content_types[]" 
+                                value="other-content"
+
+                                aria-controls="content-types-other-input"
+                                aria-expanded="false"
+
+                                data-logic="show-other"
+                            >
+                            Other
+                        </label>
+
+                        <!-- OTHER CONTENT -->
+                        <div 
+                            id="content-types-other-input"
+                            class="contact-form__field--full contact-form__field--conditional"
+                            
+                            hidden
+                        >
+                            <input 
+                                class="contact-form__input" 
+                                type="text" 
+                                name="content_types_other" 
+                                placeholder="Describe the content type"
+                                aria-label="Describe the content type"
+                                disabled
+
+                                data-purpose="other-content"
+                            >
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- BUDGET -->
+
+                <fieldset 
+                    class="contact-form__field contact-form__field--full" 
+                    aria-describedby="budget-hint"
+                >
+                    <legend class="contact-form__label">
+                        Do you have a rough budget in mind for this project?
+                    </legend>
+
+                    <p class="contact-form__hint" id="budget-hint">
+                        No pressure — this just helps us recommend the best strategy and scope for you
+                    </p>
+
+                    <div class="contact-form__radio-group">
+                        <label class="contact-form__radio">
+                            <input
+                                class="contact-form__radio-input"
+                                type="radio"
+                                name="budget"
+                                value="under-5k"
+                            >
+                            <span class="contact-form__radio-label">
+                                Under $5k
+                            </span>
+                        </label>
+
+                        <label class="contact-form__radio">
+                            <input
+                                class="contact-form__radio-input"
+                                type="radio"
+                                name="budget"
+                                value="5k-10k"
+                            >
+                            <span class="contact-form__radio-label">
+                                $5k – $10k
+                            </span>
+                        </label>
+
+                        <label class="contact-form__radio">
+                            <input
+                                class="contact-form__radio-input"
+                                type="radio"
+                                name="budget"
+                                value="10k-20k"
+                            >
+                            <span class="contact-form__radio-label">
+                                $10k – $20k
+                            </span>
+                        </label>
+
+                        <label class="contact-form__radio">
+                            <input
+                                class="contact-form__radio-input"
+                                type="radio"
+                                name="budget"
+                                value="above-20k"
+                            >
+                            <span class="contact-form__radio-label">
+                                Above $20k
+                            </span>
+                        </label>
+
+                        <label class="contact-form__radio">
+                            <input
+                                class="contact-form__radio-input"
+                                type="radio"
+                                name="budget"
+                                value="not-sure"
+                            >
+                            <span class="contact-form__radio-label">
+                                Not sure yet
+                            </span>
+                        </label>
+                    </div>
+
+                    <!-- <p id="budget-error" class="contact-form__error">
+                        Please select a budget
+                    </p> -->
+                </fieldset>
+
+                <!-- TIMELINE -->
+
+                <fieldset class="contact-form__field contact-form__field--full">
+                    <legend class="contact-form__label">
+                        What is your ideal timeline for this project?
+                    </legend>
+
+                    <div class="contact-form__radio-group">
+                        <label class="contact-form__radio">
+                            <input
+                                class="contact-form__radio-input"
+                                type="radio"
+                                name="timeline"
+                                value="asap"
+                            >
+                            <span class="contact-form__radio-label">
+                                ASAP
+                            </span>
+                        </label>
+
+                        <label class="contact-form__radio">
+                            <input
+                                class="contact-form__radio-input"
+                                type="radio"
+                                name="timeline"
+                                value="within-1-month"
+                            >
+                            <span class="contact-form__radio-label">
+                                Within 1 month
+                            </span>
+                        </label>
+
+                        <label class="contact-form__radio">
+                            <input
+                                class="contact-form__radio-input"
+                                type="radio"
+                                name="timeline"
+                                value="1-3-months"
+                            >
+                            <span class="contact-form__radio-label">
+                                1–3 months
+                            </span>
+                        </label>
+
+                        <label class="contact-form__radio">
+                            <input
+                                class="contact-form__radio-input"
+                                type="radio"
+                                name="timeline"
+                                value="3-plus-months"
+                            >
+                            <span class="contact-form__radio-label">
+                                3+ months
+                            </span>
+                        </label>
+
+                        <label class="contact-form__radio">
+                            <input
+                                class="contact-form__radio-input"
+                                type="radio"
+                                name="timeline"
+                                value="flexible"
+                            >
+                            <span class="contact-form__radio-label">
+                                Flexible
+                            </span>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <!-- MESSAGE -->
+
+                <div class="contact-form__field contact-form__field--full">
+                    <label class="contact-form__label" for="message">
+                        Tell us a little more about your project
+                    </label>
+
+                    <p class="contact-form__hint" id="message-hint">
+                        Please provide us with details on what you are looking for, so we can best prepare before we respond or connect. 
+                        The more context you can provide, the better our first conversation will be. 
+                        If you are not sure or just want to chat live, that is OK of course too. 
+                        We can definitely explore on our first call. Just reply N/A if that is the case
+                    </p>
+
+                    <textarea 
+                        class="contact-form__textarea"
+                        id="message"
+                        name="message"
+                        placeholder="Enter your message"
+                        aria-describedby="message-hint"
+                        required
+
+                        data-purpose="message"
+                    ></textarea>
+                </div>
+
+                <!-- SUBMIT -->
+
+                <div class="contact-form__actions">
+                    <button class="button button--primary" type="submit">
+                        Submit
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="rgba(255,255,255,1)">
+                            <path d="M19.4999 2C20.0945 1.99965 20.6988 2.15061 21.2499 2.46875C22.924 3.43525 23.4977 5.57598 22.5312 7.25L15.0312 20.2402C14.0647 21.9142 11.924 22.488 10.2499 21.5215C9.41368 21.0386 8.85171 20.2606 8.62005 19.3975L6.85345 12.8037L2.02533 7.97461C0.65837 6.60765 0.658729 4.39208 2.02533 3.02539C2.65755 2.39311 3.53385 2.00011 4.49994 2H19.4999ZM4.49994 4C4.08555 4.00011 3.71182 4.167 3.43939 4.43945C2.85354 5.0254 2.85378 5.97494 3.43939 6.56055L7.914 11.0352L14.8906 7.00684C15.3688 6.7308 15.9806 6.89487 16.2568 7.37305C16.5327 7.85124 16.3687 8.46312 15.8906 8.73926L8.914 12.7676L10.5517 18.8789C10.6515 19.2509 10.8913 19.5819 11.2499 19.7891C11.9673 20.2032 12.8845 19.9575 13.2988 19.2402L20.7988 6.25C21.213 5.53256 20.9674 4.61539 20.2499 4.20117C20.0128 4.06427 19.7555 3.99982 19.5009 4H4.49994Z"></path>
+                        </svg>
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </section>
+
+  </main>
+
+
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>
