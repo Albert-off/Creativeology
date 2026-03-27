@@ -670,7 +670,7 @@ img {
 
 
 
-/* ================ SERVICES ================ */
+/* ================ SERVICES PREVIEW ================ */
 .services__header {
     margin-bottom: 2rem;
 }
@@ -771,11 +771,111 @@ img {
 
 
 /* ================ FOOTER ================ */
+.footer {
+    border-top: 1px solid hsl(233, 9%, 81%);
+    background-color: #FBF7F6;
+}
+
+.footer__logo-slogan {
+    margin-top: .25rem;
+}
+
+.footer__links__list {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    column-gap: 2rem;
+    row-gap: 4rem;
+}
+
+.footer__links {
+    display: flex;
+    flex-direction: column;
+    row-gap: .75rem;
+}
+
+.footer__title {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: #222;
+}
+
+.footer__link {
+    align-self: flex-start;
+    transition: color .3s ease;
+}
+.footer__link:hover {
+    color: hsl(50, 34%, 48%);
+}
+
+.footer__line-divider {
+    margin-top: 3rem;
+    border: none;
+    height: 1px;
+    background-color: hsl(233, 9%, 81%);
+}
+
+.footer__bottom {
+    padding-block: 3rem;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+
+.footer__legal,
+.footer__social__list {
+    display: flex;
+    column-gap: 1.5rem;
+}
+
+.footer__legal {
+    row-gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.footer__social__list {
+    flex-wrap: wrap;
+    row-gap: 1.5rem;
+}
+
+.footer__credit > a,
+.footer__social__list > a {
+    opacity: .5;
+}
+.footer__credit > a:hover,
+.footer__social__list > a:hover {
+    opacity: 1;
+}
 
 
 
 
-/* ================ PORTFOLIO ================ */
+
+
+
+
+/* ================ ABOUT PAGE ================ */
+.about__title {
+    margin-bottom: 1rem;
+}
+
+.about__container h2 {
+    margin-bottom: .5rem;
+}
+
+.about__container p {
+    margin-bottom: 1rem;
+}
+
+
+
+/* ================ SERVICES PAGE ================ */
+
+
+
+
+/* ================ PORTFOLIO PAGE ================ */
 .portfolio__title {
     margin-bottom: 1rem;
 }
@@ -788,16 +888,7 @@ img {
 }
 
 
-.portfolio__item {
-    border-radius: .5rem;
-    transition: transform .3s ease, opacity .3s ease;
-}
-.portfolio__item:hover {
-    transform: translateY(-.5rem);
-    opacity: .8;
-}
-
-.portfolio__grid {
+/* .portfolio__grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 1rem;
@@ -813,6 +904,68 @@ img {
         padding: 1rem;
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     }
+} */
+
+
+.portfolio__grid {
+    /* Количество колонок */
+    /* column-count: 5;  */
+
+    column-width: clamp(160px, 9.5vw + 120px, 320px);
+
+    /* Зазор между колонками */
+    column-gap: 1rem;  
+
+    padding: 2rem;
+    /* Фоллбек и градиент одной строкой */
+    background: #EBE9E0 linear-gradient(to right, #F5F4F0, #EBE9E0);
+}
+
+.portfolio__item {
+    margin-bottom: 1rem; /* Зазор между картинками по вертикали */
+    break-inside: avoid; /* Важно: предотвращает разрыв картинки между колонками */
+
+    /* Используем translate вместо transform для чистоты, если браузеры позволяют,
+     или фиксируем оба значения здесь: */
+    transform: translateZ(0);  /* Улучшение производительности рендеринга */
+    transition: transform .3s ease, opacity .3s ease; /* Оптимизируем переходы */
+    
+    /* Подсказываем браузеру, что будет меняться (GPU оптимизация) */
+    will-change: transform;
+}
+/* Ховер только для устройств с мышкой */
+@media (hover: hover) {
+  .portfolio__item:hover {
+    /* Сохраняем translateZ, добавляя подъем */
+    transform: translateZ(0) translateY(-.5rem);
+  }
+  
+  .portfolio__item:hover .portfolio__img {
+    opacity: .8;
+  }
+}
+
+
+.portfolio__img {
+    display: block; /* Убирает лишний зазор снизу */
+    width: 100%; /* Гарантируем, что картинка не будет меньше колонки */
+    border-radius: .5rem;
+    /* opacity перенесли в переход родителя для плавности */
+}
+
+@media (max-width: 767px) {
+    .portfolio__grid {
+        padding: 1rem;
+        column-gap: .5rem;
+    }
+    .portfolio__item {
+        margin-bottom: .5rem;
+        /* На мобилках лучше отключать тяжелые трансформации для плавности скролла */
+        will-change: auto;
+    }
+    .portfolio__item:hover {
+        transform: translateY(-.25rem);
+    }
 }
 
 
@@ -820,7 +973,9 @@ img {
 
 
 
-/* ================ CONTACT ================ */
+
+
+/* ================ CONTACT PAGE ================ */
 .contact__title {
     margin-bottom: 1rem;
 }
