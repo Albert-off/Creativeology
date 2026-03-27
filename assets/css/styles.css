@@ -810,6 +810,7 @@ img {
 
 @media (max-width: 767px) {
     .portfolio__grid {
+        padding: 1rem;
         grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     }
 }
